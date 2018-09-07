@@ -9,13 +9,14 @@
     "watch": "gulp watch",
     "build": "gulp",
     "coverage": "gulp coverage",
-    "jsdoc": "jsdoc src/*.js src/util/* -d docs"
+    "jsdoc": "jsdoc src/*.js src/util/* -d docs -R README.md",
+    "prepare": "npm run build"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/idiidk/magister-api.git"
   },
-  "keywords": [],
+  "keywords": ["magister", "api", "school", "application", "link", "auth", "oauth"],
   "author": "idiidk <dviide@protonmail.com>",
   "license": "MIT",
   "bugs": {

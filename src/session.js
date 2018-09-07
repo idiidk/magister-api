@@ -45,11 +45,10 @@ class Session {
 
 
   /**
-   * 
    * @param {String} method - HTTP request method, choose from: get, post, delete, put
    * @param {String} endpointUrl - The url of the endpoint to hit
    * @param {Object} options - Additional options to pass to Axios
-   * @returns {Promise} - Return promise with body data
+   * @returns {Promise<Object>} - Promise with body data
    */
   hitEndpoint(method, endpointUrl, options) {
     if (options.headers) {

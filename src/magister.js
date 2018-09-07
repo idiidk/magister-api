@@ -19,9 +19,7 @@ class Magister {
 
   /**
    * Authenticates with Magister
-   * @returns {Promise}
-   * @fulfills {Session} - Fulfills Session object for further interaction
-   * @rejects {Error} - Rejects an Error object with information
+   * @returns {Promise<Session>} A session object
    */
   authenticate() {
     return new Promise((resolve, reject) => {
@@ -50,7 +48,7 @@ class Magister {
    */
   findSchool(schoolName) {
     return new Promise((resolve, reject) => {
-      HTTP.get(`https://mijn.magister.net/api/schools?filter=${this.school}`)
+      HTTP.get(`https://mijn.magister.net/api/schools?filter=${schoolName}`)
         .then(response => {
           if (!response.data.Message) {
             resolve(response.data)
@@ -62,14 +60,6 @@ class Magister {
     })
   }
 
-  /**
-   * Internal function for login, normally not called manually
-   * @param {Magister} self 
-   * @param {Array} schoolArray 
-   * @returns {Promise} - Returns a promise that resolves to a Session object
-   * @fulfills {Session} - Fulfills to a Session object
-   * @rejects {Error} - Rejects an error with information
-   */
   _login(self, schoolArray) {
     return new Promise((resolve, reject) => {
       if (schoolArray.length === 0) {
@@ -86,7 +76,7 @@ class Magister {
             },
           })
           .then(response => {
-            const returnUrl = decodeURIComponent(response.headers.location.split("returnUrl=")[1])
+            const returnUrl = decodeURIComponent(response.headers.location.split('returnUrl=')[1])
 
             HTTP.get(response.headers.location, {
                 maxRedirects: 0,
@@ -95,7 +85,7 @@ class Magister {
                 },
               })
               .then(response => {
-                const sessionId = response.headers.location.split("?")[1].split("&")[0].split("=")[1]
+                const sessionId = response.headers.location.split('?')[1].split('&')[0].split('=')[1]
                 const authUrl = 'https://accounts.magister.net/challenge/'
                 let xsrf = response.headers['set-cookie'][1].split('XSRF-TOKEN=')[1].split(';')[0]
                 const authCookies = response.headers['set-cookie'].toString()
