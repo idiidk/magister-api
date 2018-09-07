@@ -1,6 +1,6 @@
 {
   "name": "magister-api",
-  "version": "0.0.4",
+  "version": "0.0.41",
   "description": "An API for the Magister school software",
   "main": "dist/magister.js",
   "files": [
