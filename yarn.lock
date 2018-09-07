@@ -2836,6 +2836,12 @@ lru-cache@2:
   version "2.7.3"
   resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-2.7.3.tgz#6d4524e8b955f95d4f5b58851ce21dd72fb4e952"
 
+magister-api@^0.0.41:
+  version "0.0.41"
+  resolved "https://registry.yarnpkg.com/magister-api/-/magister-api-0.0.41.tgz#0d6e9e5f6aed4bd0e0bba90e1948d2476c5fcaab"
+  dependencies:
+    moment "^2.22.2"
+
 make-error-cause@^1.1.1:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/make-error-cause/-/make-error-cause-1.2.2.tgz#df0388fcd0b37816dff0a5fb8108939777dcbc9d"
