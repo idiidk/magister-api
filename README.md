@@ -15,7 +15,7 @@ npm install magister-api
 
 ## Documentation
 
-For documentation, please look at the [Wiki](https://github.com/idiidk/magister-api/wiki)
+For documentation, please look at the [Wiki](https://idiidk.site/magister-api/)
 
 ## Release History
 
