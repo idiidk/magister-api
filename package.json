@@ -1,6 +1,6 @@
 {
   "name": "magister-api",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "An API for the Magister school software",
   "main": "dist/magister.js",
   "scripts": {
@@ -16,7 +16,15 @@
     "type": "git",
     "url": "https://github.com/idiidk/magister-api.git"
   },
-  "keywords": ["magister", "api", "school", "application", "link", "auth", "oauth"],
+  "keywords": [
+    "magister",
+    "api",
+    "school",
+    "application",
+    "link",
+    "auth",
+    "oauth"
+  ],
   "author": "idiidk <dviide@protonmail.com>",
   "license": "MIT",
   "bugs": {
