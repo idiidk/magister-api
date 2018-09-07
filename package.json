@@ -10,7 +10,7 @@
     "build": "gulp",
     "coverage": "gulp coverage",
     "jsdoc": "jsdoc src/*.js src/util/* -d docs -R README.md",
-    "prepare": "npm run build"
+    "prepare": "npm run jsdoc && npm run build"
   },
   "repository": {
     "type": "git",

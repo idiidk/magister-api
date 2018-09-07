@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: magister.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: magister.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import HTTP from './util/http.js'
+import Session from './session.js'
+
+/** Main class for authenticating with Magister */
+class Magister {
+  /**
+   * Initialize a new Magister instance with credentials
+   * @param {String} school - A name used to lookup the school url
+   * @param {String} username - The username of your Magister account
+   * @param {String} password - The password of your Magister account
+   */
+  constructor(school, username, password) {
+    this.school = school
+    this.username = username
+    this.password = password
+
+    this.authenticated = false
+  }
+
+  /**
+   * Authenticates with Magister
+   * @returns {Promise&lt;Session>} A session object
+   */
+  authenticate() {
+    return new Promise((resolve, reject) => {
+      if (this.school &amp;&amp; this.username &amp;&amp; this.password) {
+        if (this.school.length &lt; 3) {
+          reject(new Error('School name must be longer than 3 characters'))
+        }
+
+        this.findSchool(this.school)
+          .then((schoolArray) => {
+            this._login(this, schoolArray)
+              .then(resolve)
+              .catch(reject)
+          })
+          .catch(reject)
+      } else {
+        reject(new Error('Please set all parameters before authenticating!'))
+      }
+    })
+  }
+
+  /**
+   * Searches for schools with specific name
+   * @param {String} schoolName - The search query 
+   * @returns {Array} - Returns an array of matching schools
+   */
+  findSchool(schoolName) {
+    return new Promise((resolve, reject) => {
+      HTTP.get(`https://mijn.magister.net/api/schools?filter=${this.school}`)
+        .then(response => {
+          if (!response.data.Message) {
+            resolve(response.data)
+          } else {
+            reject(response.data.message)
+          }
+        })
+        .catch(reject)
+    })
+  }
+
+  _login(self, schoolArray) {
+    return new Promise((resolve, reject) => {
+      if (schoolArray.length === 0) {
+        reject(new Error('No schools found!'))
+      } else {
+        const school = schoolArray[0]
+        const filteredName = school.Url.split('https://').join('')
+        const authorizeUrl = `https://accounts.magister.net/connect/authorize?client_id=M6-${filteredName}&amp;redirect_uri=https%3A%2F%2F${filteredName}%2Foidc%2Fredirect_callback.html&amp;response_type=id_token%20token&amp;scope=openid%20profile%20magister.ecs.legacy%20magister.mdv.broker.read%20magister.dnn.roles.read&amp;state=29302702b955469f84d342fcb4cece33&amp;nonce=8cfe9935b3a14fc593f328663d14f191&amp;acr_values=tenant%3A${filteredName}`
+
+        HTTP.get(authorizeUrl, {
+            maxRedirects: 0,
+            validateStatus: (status) => {
+              return status === 302
+            },
+          })
+          .then(response => {
+            const returnUrl = decodeURIComponent(response.headers.location.split("returnUrl=")[1])
+
+            HTTP.get(response.headers.location, {
+                maxRedirects: 0,
+                validateStatus: (status) => {
+                  return status === 302
+                },
+              })
+              .then(response => {
+                const sessionId = response.headers.location.split("?")[1].split("&amp;")[0].split("=")[1]
+                const authUrl = 'https://accounts.magister.net/challenge/'
+                let xsrf = response.headers['set-cookie'][1].split('XSRF-TOKEN=')[1].split(';')[0]
+                const authCookies = response.headers['set-cookie'].toString()
+
+                HTTP.post(authUrl + 'username', {
+                    data: {
+                      sessionId: sessionId,
+                      returnUrl: returnUrl,
+                      username: self.username
+                    },
+                    headers: {
+                      'Cookie': authCookies,
+                      'X-XSRF-TOKEN': xsrf
+                    },
+                  })
+                  .then(response => {
+                    HTTP.post(authUrl + 'password', {
+                        data: {
+                          sessionId: sessionId,
+                          returnUrl: returnUrl,
+                          password: self.password
+                        },
+                        headers: {
+                          'Cookie': authCookies,
+                          'X-XSRF-TOKEN': xsrf
+                        },
+                      })
+                      .then((response) => {
+                        HTTP.get('https://accounts.magister.net' + returnUrl, {
+                            headers: {
+                              'Cookie': response.headers['set-cookie'],
+                              'X-XSRF-TOKEN': xsrf,
+                            },
+                            maxRedirects: 0,
+                            validateStatus: (status) => {
+                              return status === 302
+                            },
+                          })
+                          .then((response) => {
+                            self.authenticated = true
+                            const bearerToken = response.headers.location.split('&amp;access_token=')[1].split('&amp;')[0]
+                            const session = new Session(sessionId, bearerToken)
+                            session.getProfileInfo()
+                              .then(() => {
+                                resolve(session)
+                              })
+                              .catch(reject)
+                          })
+                          .catch(reject)
+                      })
+                      .catch((err) => {
+                        reject(new Error('Password incorrect!'))
+                      })
+                  })
+                  .catch((err) => {
+                    reject(new Error('Username incorrect!'))
+                  })
+                  .catch(reject)
+              })
+              .catch(reject)
+          })
+          .catch(reject)
+      }
+    })
+  }
+}
+
+export default Magister;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="HTTP.html">HTTP</a></li><li><a href="Magister.html">Magister</a></li><li><a href="Session.html">Session</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Sep 07 2018 20:59:29 GMT+0200 (CEST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

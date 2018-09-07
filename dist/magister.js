@@ -94,9 +94,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  /**
 	   * Authenticates with Magister
-	   * @returns {Promise}
-	   * @fulfills {Session} - Fulfills Session object for further interaction
-	   * @rejects {Error} - Rejects an Error object with information
+	   * @returns {Promise<Session>} A session object
 	   */
 	
 	
@@ -129,10 +127,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'findSchool',
 	    value: function findSchool(schoolName) {
-	      var _this2 = this;
-	
 	      return new Promise(function (resolve, reject) {
-	        _http2.default.get('https://mijn.magister.net/api/schools?filter=' + _this2.school).then(function (response) {
+	        _http2.default.get('https://mijn.magister.net/api/schools?filter=' + schoolName).then(function (response) {
 	          if (!response.data.Message) {
 	            resolve(response.data);
 	          } else {
@@ -141,16 +137,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }).catch(reject);
 	      });
 	    }
-	
-	    /**
-	     * Internal function for login, normally not called manually
-	     * @param {Magister} self 
-	     * @param {Array} schoolArray 
-	     * @returns {Promise} - Returns a promise that resolves to a Session object
-	     * @fulfills {Session} - Fulfills to a Session object
-	     * @rejects {Error} - Rejects an error with information
-	     */
-	
 	  }, {
 	    key: '_login',
 	    value: function _login(self, schoolArray) {
@@ -168,7 +154,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	              return status === 302;
 	            }
 	          }).then(function (response) {
-	            var returnUrl = decodeURIComponent(response.headers.location.split("returnUrl=")[1]);
+	            var returnUrl = decodeURIComponent(response.headers.location.split('returnUrl=')[1]);
 	
 	            _http2.default.get(response.headers.location, {
 	              maxRedirects: 0,
@@ -176,7 +162,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                return status === 302;
 	              }
 	            }).then(function (response) {
-	              var sessionId = response.headers.location.split("?")[1].split("&")[0].split("=")[1];
+	              var sessionId = response.headers.location.split('?')[1].split('&')[0].split('=')[1];
 	              var authUrl = 'https://accounts.magister.net/challenge/';
 	              var xsrf = response.headers['set-cookie'][1].split('XSRF-TOKEN=')[1].split(';')[0];
 	              var authCookies = response.headers['set-cookie'].toString();
@@ -422,11 +408,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	
 	    /**
-	     * 
 	     * @param {String} method - HTTP request method, choose from: get, post, delete, put
 	     * @param {String} endpointUrl - The url of the endpoint to hit
 	     * @param {Object} options - Additional options to pass to Axios
-	     * @returns {Promise} - Return promise with body data
+	     * @returns {Promise<Object>} - Promise with body data
 	     */
 	
 	  }, {
