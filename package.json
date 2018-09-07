@@ -1,7 +1,7 @@
 {
   "name": "magister-api",
   "version": "0.0.1",
-  "description": "An API for Magister",
+  "description": "An API for the Magister school software",
   "main": "dist/magister.js",
   "scripts": {
     "clean": "gulp clean && gulp clean-tmp",
