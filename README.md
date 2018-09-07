@@ -2,8 +2,8 @@
 
 An API for the Magister school software which implements the new login system!
 
-[![Dependency Status](https://david-dm.org/idiidk/magisterAPI.svg)](https://david-dm.org/idiidk/magisterAPI)
-[![devDependency Status](https://david-dm.org/idiidk/magisterAPI/dev-status.svg)](https://david-dm.org/idiidk/magisterAPI#info=devDependencies)
+[![Dependency Status](https://david-dm.org/idiidk/magister-api.svg)](https://david-dm.org/idiidk/magister-api)
+[![devDependency Status](https://david-dm.org/idiidk/magister-api/dev-status.svg)](https://david-dm.org/idiidk/magister-api#info=devDependencies)
 
 ## Installation
 
