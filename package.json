@@ -12,7 +12,7 @@
     "build": "gulp",
     "coverage": "gulp coverage",
     "jsdoc": "jsdoc src/*.js src/util/* -d docs -R README.md",
-    "prepublishOnly": "npm run jsdoc && npm run build"
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
