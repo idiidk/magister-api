@@ -5,17 +5,34 @@ An API for the Magister school software which implements the new login system!
 [![Dependency Status](https://david-dm.org/idiidk/magister-api.svg)](https://david-dm.org/idiidk/magister-api)
 [![devDependency Status](https://david-dm.org/idiidk/magister-api/dev-status.svg)](https://david-dm.org/idiidk/magister-api#info=devDependencies)
 
-## Installation
+## Quick Start
 
-OS X, Linux and Windows:
+Install the package:
 
 ```sh
 npm install magister-api
-``` 
+```
+
+Use the package in Node:
+
+```javascript
+const { default: Magister } = require('magister-api')
+const magister = new Magister('schoolName', 'username', 'password')
+
+magister.authenticate()
+  .then(session => {
+    session.getProfileInfo()
+      .then(info => {
+        console.log('Yay, this is me:', info)
+      })
+  }).catch(error => {
+    throw new Error(error)
+  })
+```
 
 ## Documentation
 
-For documentation, please look at the [Wiki](https://idiidk.site/magister-api/)
+For documentation, please look at the [JSDocs](https://idiidk.site/magister-api/)
 
 ## Release History
 

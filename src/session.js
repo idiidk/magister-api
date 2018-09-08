@@ -5,9 +5,9 @@ import moment from 'moment'
 class Session {
   /**
    * Initializes new Session object from tokens, usually automatically done when authenticating
-   * @param {String} sessionId 
-   * @param {String} bearerToken 
-   * @param {String} schoolUrl
+   * @param {String} sessionId - The current sessionId
+   * @param {String} bearerToken - The current bearerToken
+   * @param {String} schoolUrl - The url of the currently connected school
    */
   constructor(sessionId, bearerToken, schoolUrl) {
     this.sessionId = sessionId
@@ -36,8 +36,8 @@ class Session {
 
   /**
    * Get all appointments from a date to a date
-   * @param {Date} from 
-   * @param {Date} to 
+   * @param {Date} from - Starting date
+   * @param {Date} to - Ending date
    * @returns {Object} - Object with info about appointments
    */
   getAppointments(from, to) {

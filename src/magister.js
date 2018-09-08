@@ -8,6 +8,8 @@ class Magister {
    * @param {String} school - A name used to lookup the school url
    * @param {String} username - The username of your Magister account
    * @param {String} password - The password of your Magister account
+   * @param {Boolean} authenticated - Boolean set to true if currently authenticated
+   * @param {Session} session - The currently authenticated session
    */
   constructor(school, username, password) {
     this.school = school
@@ -15,6 +17,7 @@ class Magister {
     this.password = password
 
     this.authenticated = false
+    this.session
   }
 
   /**
@@ -128,6 +131,7 @@ class Magister {
                             self.authenticated = true
                             const bearerToken = response.headers.location.split('&access_token=')[1].split('&')[0]
                             const session = new Session(sessionId, bearerToken, school.Url)
+                            this.session = session
                             session.getProfileInfo()
                               .then(() => {
                                 resolve(session)
