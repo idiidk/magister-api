@@ -127,7 +127,7 @@ class Magister {
                           .then((response) => {
                             self.authenticated = true
                             const bearerToken = response.headers.location.split('&access_token=')[1].split('&')[0]
-                            const session = new Session(sessionId, bearerToken)
+                            const session = new Session(sessionId, bearerToken, school.Url)
                             session.getProfileInfo()
                               .then(() => {
                                 resolve(session)

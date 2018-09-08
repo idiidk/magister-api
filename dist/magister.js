@@ -201,7 +201,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                  }).then(function (response) {
 	                    self.authenticated = true;
 	                    var bearerToken = response.headers.location.split('&access_token=')[1].split('&')[0];
-	                    var session = new _session2.default(sessionId, bearerToken);
+	                    var session = new _session2.default(sessionId, bearerToken, school.Url);
 	                    session.getProfileInfo().then(function () {
 	                      resolve(session);
 	                    }).catch(reject);
@@ -359,12 +359,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * Initializes new Session object from tokens, usually automatically done when authenticating
 	   * @param {String} sessionId 
 	   * @param {String} bearerToken 
+	   * @param {String} schoolUrl
 	   */
-	  function Session(sessionId, bearerToken) {
+	  function Session(sessionId, bearerToken, schoolUrl) {
 	    _classCallCheck(this, Session);
 	
 	    this.sessionId = sessionId;
 	    this.bearerToken = bearerToken;
+	    this.schoolUrl = schoolUrl;
 	    this.id = null;
 	    this.authInject = {
 	      headers: {
@@ -384,7 +386,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: function getProfileInfo() {
 	      var _this = this;
 	
-	      return _http2.default.get('https://baudartius.magister.net/api/account?noCache=0', this.authInject).then(function (response) {
+	      return _http2.default.get(this.schoolUrl + '/api/account?noCache=0', this.authInject).then(function (response) {
 	        return response.data;
 	      }).then(function (data) {
 	        _this.id = data.Persoon.Id;
@@ -402,7 +404,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'getAppointments',
 	    value: function getAppointments(from, to) {
-	      return _http2.default.get('https://baudartius.magister.net/api/personen/' + this.id + '/afspraken?status=1&tot=' + (0, _moment2.default)(to).format("YYYY-MM-DD") + '&van=' + (0, _moment2.default)(from).format("YYYY-MM-DD"), this.authInject).then(function (response) {
+	      return _http2.default.get(this.schoolUrl + '/api/personen/' + this.id + '/afspraken?status=1&tot=' + (0, _moment2.default)(to).format("YYYY-MM-DD") + '&van=' + (0, _moment2.default)(from).format("YYYY-MM-DD"), this.authInject).then(function (response) {
 	        return response.data;
 	      });
 	    }

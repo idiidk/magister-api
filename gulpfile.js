@@ -1,13 +1,9 @@
 const gulp = require('gulp');
 const loadPlugins = require('gulp-load-plugins');
 const del = require('del');
-const glob = require('glob');
 const path = require('path');
-const isparta = require('isparta');
-const webpack = require('webpack');
 const webpackStream = require('webpack-stream');
 
-const Instrumenter = isparta.Instrumenter;
 const manifest = require('./package.json');
 
 // Load all of our Gulp plugins
@@ -79,19 +75,6 @@ function build() {
     .pipe(gulp.dest(destinationFolder));
 }
 
-function coverage(done) {
-  _registerBabel();
-  gulp.src(['src/**/*.js'])
-    .pipe($.istanbul({
-      instrumenter: Instrumenter,
-      includeUntested: true
-    }))
-    .pipe($.istanbul.hookRequire())
-    .on('finish', () => {
-      done();
-    });
-}
-
 const watchFiles = ['src/**/*', 'test/**/*', 'package.json', '**/.eslintrc'];
 
 // Build on change
@@ -116,9 +99,6 @@ gulp.task('lint', ['lint-src', 'lint-gulpfile']);
 
 // Build two versions of the library
 gulp.task('build', ['lint', 'clean'], build);
-
-// Set up coverage and run tests
-gulp.task('coverage', ['lint'], coverage);
 
 // Run the headless unit tests as you make changes.
 gulp.task('watch', watch);

@@ -7,10 +7,12 @@ class Session {
    * Initializes new Session object from tokens, usually automatically done when authenticating
    * @param {String} sessionId 
    * @param {String} bearerToken 
+   * @param {String} schoolUrl
    */
-  constructor(sessionId, bearerToken) {
+  constructor(sessionId, bearerToken, schoolUrl) {
     this.sessionId = sessionId
     this.bearerToken = bearerToken
+    this.schoolUrl = schoolUrl
     this.id = null
     this.authInject = {
       headers: {
@@ -24,7 +26,7 @@ class Session {
    * @returns {Object} - Object with user info
    */
   getProfileInfo() {
-    return HTTP.get('https://baudartius.magister.net/api/account?noCache=0', this.authInject)
+    return HTTP.get(`${this.schoolUrl}/api/account?noCache=0`, this.authInject)
       .then(response => response.data)
       .then((data) => {
         this.id = data.Persoon.Id
@@ -39,7 +41,7 @@ class Session {
    * @returns {Object} - Object with info about appointments
    */
   getAppointments(from, to) {
-    return HTTP.get(`https://baudartius.magister.net/api/personen/${this.id}/afspraken?status=1&tot=${moment(to).format("YYYY-MM-DD")}&van=${moment(from).format("YYYY-MM-DD")}`, this.authInject)
+    return HTTP.get(`${this.schoolUrl}/api/personen/${this.id}/afspraken?status=1&tot=${moment(to).format("YYYY-MM-DD")}&van=${moment(from).format("YYYY-MM-DD")}`, this.authInject)
       .then(response => response.data)
   }
 
