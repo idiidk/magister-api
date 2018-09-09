@@ -1,15 +1,16 @@
 import HTTP from './util/http.js'
 import Session from './session.js'
 
-/** Main class for authenticating with Magister */
+/** Main class for authenticating with Magister 
+ * @prop {Boolean} authenticated - Boolean set to true if currently authenticated
+ * @prop {Session} session - The currently authenticated session
+ */
 class Magister {
   /**
    * Initialize a new Magister instance with credentials
    * @param {String} school - A name used to lookup the school url
    * @param {String} username - The username of your Magister account
    * @param {String} password - The password of your Magister account
-   * @param {Boolean} authenticated - Boolean set to true if currently authenticated
-   * @param {Session} session - The currently authenticated session
    */
   constructor(school, username, password) {
     this.school = school
