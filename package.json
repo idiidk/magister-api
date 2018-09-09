@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "build": "./node_modules/.bin/babel src -d dist",
-    "jsdoc": "./node_modules/.bin/jsdoc src/*.js src/util/* -d docs -R README.md",
+    "jsdoc": "./node_modules/.bin/jsdoc src/** -d docs -R README.md",
     "test": "./node_modules/.bin/mocha"
   },
   "repository": {

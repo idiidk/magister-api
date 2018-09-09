@@ -36,6 +36,13 @@ For documentation, please look at the [JSDocs](https://idiidk.site/magister-api/
 
 ## Release History
 
+* 0.1.0 - First types!
+  * Able to fetch Appointments
+  * Able to fetch Group data
+  * Able to fetch Person data
+  * Better documentation
+  * Wrote tests
+
 * 0.0.1 - Initial release
   * Able to connect and authenticate with the Magister private API
 

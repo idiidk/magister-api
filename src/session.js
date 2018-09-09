@@ -1,6 +1,10 @@
 import HTTP from './util/http.js'
 import moment from 'moment'
 
+import Group from './types/Group.js'
+import Appointment from './types/Appointment.js'
+import Person from './types/Person.js'
+
 /** A Session object for further interaction with Magister */
 class Session {
   /**
@@ -30,7 +34,7 @@ class Session {
       .then(response => response.data)
       .then((data) => {
         this.id = data.Persoon.Id
-        return data
+        return new Person(data.Persoon)
       })
   }
 
@@ -43,8 +47,32 @@ class Session {
   getAppointments(from, to) {
     return HTTP.get(`${this.schoolUrl}/api/personen/${this.id}/afspraken?status=1&tot=${moment(to).format("YYYY-MM-DD")}&van=${moment(from).format("YYYY-MM-DD")}`, this.authInject)
       .then(response => response.data)
+      .then(data => {
+        const appointments = [];
+        for (let i = 0; i < data.Items.length; i++) {
+          appointments.push(new Appointment(data.Items[i]))
+        }
+
+        return appointments
+      })
   }
 
+  /**
+   * Get all groups (classes) a user has ever been in
+   * @returns {Array<Group>} - Array containing group objects
+   */
+  getGroups() {
+    return HTTP.get(`${this.schoolUrl}/api/personen/${this.id}/aanmeldingen?geenToekomstige=false`, this.authInject)
+      .then(response => response.data)
+      .then(data => {
+        const groups = [];
+        for (let i = 0; i < data.Items.length; i++) {
+          groups.push(new Group(data.Items[i]))
+        }
+
+        return groups
+      })
+  }
 
   /**
    * @param {String} method - HTTP request method, choose from: get, post, delete, put

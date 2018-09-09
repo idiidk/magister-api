@@ -30,7 +30,7 @@ describe('Magister', function () {
 
 describe('Session', function () {
   describe('#getProfileInfo', function () {
-    it("Should be able to retrieve profile info", function () {
+    it("Should be able to retrieve user profile info", function () {
       return session.getProfileInfo()
         .then(profile => {
           expect(typeof profile).to.equal('object')
@@ -39,10 +39,19 @@ describe('Session', function () {
   })
 
   describe('#getAppointments', function () {
-    it("Should be able to retrieve appointments", function () {
-      return session.getAppointments(new Date(), new Date())
+    it("Should be able to retrieve user appointments", function () {
+      return session.getAppointments(new Date(), new Date(new Date().getTime() + 86400000))
         .then(appointments => {
-          expect(typeof appointments).to.equal('object')
+          expect(typeof appointments.length).to.equal('number')
+        })
+    })
+  })
+
+  describe('#getGroups', function () {
+    it("Should be able to retrieve user groups", function () {
+      return session.getGroups()
+        .then(groups => {
+          expect(typeof groups.length).to.equal('number')
         })
     })
   })
