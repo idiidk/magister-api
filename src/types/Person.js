@@ -1,4 +1,4 @@
-/** A Person object for futher interaction with people 
+/** A Person object for further interaction with people 
  * @memberof Session
  * @prop {String} firstName - The first name of the person
  * @prop {String} nameInfix - The name infix of the person

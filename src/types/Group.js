@@ -1,4 +1,4 @@
-/** A Group object for futher interaction with groups 
+/** A Group object for further interaction with groups 
  * @memberof Session
  * @prop {Number} id - The id of the group
  * @prop {String} description - The description of the group

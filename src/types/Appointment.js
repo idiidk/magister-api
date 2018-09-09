@@ -1,4 +1,4 @@
-/** An Appointment object for futher interaction with appointments 
+/** An Appointment object for further interaction with appointments 
  * @memberof Session
  * @prop {String} notes - Extra notes
  * @prop {Boolean} finishedHomework - Has finished homework
