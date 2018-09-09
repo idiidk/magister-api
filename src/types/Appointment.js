@@ -1,4 +1,4 @@
-/** A group object for futher interaction with groups 
+/** An Appointment object for futher interaction with appointments 
  * @memberof Session
  * @prop {String} notes - Extra notes
  * @prop {Boolean} finishedHomework - Has finished homework
@@ -18,7 +18,7 @@
 class Appointment {
   /**
    * Initializes new Appointment object from a raw data object
-   * @param {Object} rawData - The raw group data directly parsed from JSON
+   * @param {Object} rawData - The raw data directly parsed from JSON
    */
   constructor(rawData) {
     this.rawData = rawData

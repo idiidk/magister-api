@@ -1,4 +1,4 @@
-/** A group object for futher interaction with groups 
+/** A Group object for futher interaction with groups 
  * @memberof Session
  * @prop {Number} id - The id of the group
  * @prop {String} description - The description of the group
@@ -12,7 +12,7 @@
 class Group {
   /**
    * Initializes new Group object from a raw data object
-   * @param {Object} rawData - The raw group data directly parsed from JSON
+   * @param {Object} rawData - The raw data directly parsed from JSON
    */
   constructor(rawData) {
     this.rawData = rawData

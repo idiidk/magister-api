@@ -1,4 +1,4 @@
-/** A group object for futher interaction with groups 
+/** A Person object for futher interaction with people 
  * @memberof Session
  * @prop {String} firstName - The first name of the person
  * @prop {String} nameInfix - The name infix of the person
@@ -9,8 +9,8 @@
  */
 class Person {
   /**
-   * Initializes new Group object from a raw data object
-   * @param {Object} rawData - The raw group data directly parsed from JSON
+   * Initializes new Person object from a raw data object
+   * @param {Object} rawData - The raw data directly parsed from JSON
    */
   constructor(rawData) {
     this.rawData = rawData
