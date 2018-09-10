@@ -5,6 +5,8 @@ const chai = require('chai')
 const mConf = require('./magisterConfig.json')
 const expect = chai.expect
 let session
+let me
+let msg
 
 describe('Magister', function () {
   const magister = new Magister(mConf.schoolName, mConf.username, mConf.password)
@@ -30,16 +32,18 @@ describe('Magister', function () {
 
 describe('Session', function () {
   describe('#getProfileInfo', function () {
-    it("Should be able to retrieve user profile info", function () {
+    it('Should be able to retrieve user profile info', function () {
       return session.getProfileInfo()
         .then(profile => {
           expect(typeof profile).to.equal('object')
+          me = profile
+          msg = new session.Message()
         })
     })
   })
 
   describe('#getAppointments', function () {
-    it("Should be able to retrieve user appointments", function () {
+    it('Should be able to retrieve user appointments', function () {
       return session.getAppointments(new Date(), new Date(new Date().getTime() + 86400000))
         .then(appointments => {
           expect(typeof appointments.length).to.equal('number')
@@ -48,11 +52,37 @@ describe('Session', function () {
   })
 
   describe('#getGroups', function () {
-    it("Should be able to retrieve user groups", function () {
+    it('Should be able to retrieve user groups', function () {
       return session.getGroups()
         .then(groups => {
           expect(typeof groups.length).to.equal('number')
         })
+    })
+  })
+})
+
+describe('Message', function () {
+  describe('#setSubject', function () {
+    it('Should be able to set message subject', function () {
+      msg.setSubject('Tests Running (magister-api)')
+    })
+  })
+
+  describe('#setBody', function () {
+    it('Should be able to set message body', function () {
+      msg.setBody('It worked!')
+    })
+  })
+
+  describe('#addRecipient', function () {
+    it('Should be able to add recipient from Person object', function () {
+      msg.addRecipient(me)
+    })
+  })
+
+  describe('#send', function () {
+    it('Should be able to send a message', function () {
+      return msg.send()
     })
   })
 })

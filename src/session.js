@@ -5,6 +5,8 @@ import Group from './types/Group.js'
 import Appointment from './types/Appointment.js'
 import Person from './types/Person.js'
 
+import Message from './chainables/Message'
+
 /** A Session object for further interaction with Magister */
 class Session {
   /**
@@ -18,11 +20,8 @@ class Session {
     this.bearerToken = bearerToken
     this.schoolUrl = schoolUrl
     this.id = null
-    this.authInject = {
-      headers: {
-        'Authorization': 'Bearer ' + this.bearerToken
-      }
-    }
+
+    this.Message = Message.bind(null, this)
   }
 
   /**
@@ -30,8 +29,7 @@ class Session {
    * @returns {Object} - Object with user info
    */
   getProfileInfo() {
-    return HTTP.get(`${this.schoolUrl}/api/account?noCache=0`, this.authInject)
-      .then(response => response.data)
+    return this.hitEndpoint('GET', `${this.schoolUrl}/api/account?noCache=0`)
       .then((data) => {
         this.id = data.Persoon.Id
         return new Person(data.Persoon)
@@ -45,8 +43,7 @@ class Session {
    * @returns {Object} - Object with info about appointments
    */
   getAppointments(from, to) {
-    return HTTP.get(`${this.schoolUrl}/api/personen/${this.id}/afspraken?status=1&tot=${moment(to).format("YYYY-MM-DD")}&van=${moment(from).format("YYYY-MM-DD")}`, this.authInject)
-      .then(response => response.data)
+    return this.hitEndpoint('GET', `${this.schoolUrl}/api/personen/${this.id}/afspraken?status=1&tot=${moment(to).format("YYYY-MM-DD")}&van=${moment(from).format("YYYY-MM-DD")}`)
       .then(data => {
         const appointments = [];
         for (let i = 0; i < data.Items.length; i++) {
@@ -62,8 +59,7 @@ class Session {
    * @returns {Array<Group>} - Array containing group objects
    */
   getGroups() {
-    return HTTP.get(`${this.schoolUrl}/api/personen/${this.id}/aanmeldingen?geenToekomstige=false`, this.authInject)
-      .then(response => response.data)
+    return this.hitEndpoint('GET', `${this.schoolUrl}/api/personen/${this.id}/aanmeldingen?geenToekomstige=false`)
       .then(data => {
         const groups = [];
         for (let i = 0; i < data.Items.length; i++) {
@@ -80,7 +76,7 @@ class Session {
    * @param {Object} options - Additional options to pass to Axios
    * @returns {Promise<Object>} - Promise with body data
    */
-  hitEndpoint(method, endpointUrl, options) {
+  hitEndpoint(method = 'GET', endpointUrl, options = {}) {
     if (options.headers) {
       options.headers['Authorization'] = 'Bearer ' + this.bearerToken
     } else {
@@ -88,7 +84,7 @@ class Session {
         'Authorization': 'Bearer ' + this.bearerToken
       }
     }
-    return HTTP[method](endpointUrl, options)
+    return HTTP[method.toLowerCase()](endpointUrl, options)
       .then(response => response.data)
   }
 }

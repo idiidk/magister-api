@@ -1,5 +1,5 @@
-import HTTP from './util/http.js'
-import Session from './session.js'
+import HTTP from './util/http'
+import Session from './session'
 
 /** Main class for authenticating with Magister 
  * @prop {Boolean} authenticated - Boolean set to true if currently authenticated

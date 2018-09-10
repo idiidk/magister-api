@@ -36,6 +36,8 @@ For documentation, please look at the [JSDocs](https://idiidk.site/magister-api/
 
 ## Release History
 
+* 0.1.1 - Added Messages
+
 * 0.1.0 - First types!
   * Able to fetch Appointments
   * Able to fetch Group data

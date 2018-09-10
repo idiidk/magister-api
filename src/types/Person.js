@@ -6,6 +6,7 @@
  * @prop {String} officialFirstNames - All the offical first names of the person
  * @prop {String} initials - The initials of the person
  * @prop {String} birthDate - The birthdate of the person
+ * @prop {Number} type - The person type
  */
 class Person {
   /**
@@ -15,12 +16,14 @@ class Person {
   constructor(rawData) {
     this.rawData = rawData
 
+    this.id = rawData.Id
     this.firstName = rawData.Roepnaam
-    this.nameInfix = rawData.OfficieleTussenvoegsels
-    this.lastName = rawData.OfficieleAchternaam
+    this.nameInfix = rawData.GebruikGeboortenaam ? rawData.GeboortenaamTussenvoegsel : rawData.OfficieleTussenvoegsels
+    this.lastName = rawData.GebruikGeboortenaam ? rawData.GeboorteAchternaam : rawData.OfficieleAchternaam
     this.officialFirstNames = rawData.OfficieleVoornamen
     this.initials = rawData.Voorletters
     this.birthDate = rawData.Geboortedatum
+    this.type = rawData.Type || 3
   }
 }
 

@@ -15,7 +15,6 @@ class HTTP {
   static get(url, options = {}) {
     options.method = 'GET'
     return axios(url, options)
-
   }
 
   /**
@@ -26,8 +25,8 @@ class HTTP {
    */
   static post(url, options = {}) {
     options.method = 'POST'
-    return axios(url, options)
-
+    options.url = url
+    return axios(options)
   }
 
   /**
@@ -39,7 +38,6 @@ class HTTP {
   static put(url, options = {}) {
     options.method = 'PUT'
     return axios(url, options)
-
   }
 
   /**
