@@ -5,6 +5,7 @@
  * @prop {Array<Person>} recipients - Recipients of message
  * @prop {Array<Attachment>} attachments - The attachments of the message
  * @prop {Boolean} isImportant - Message importance, if true the message has a little exclemation mark next to it in Magister
+ * @prop {String} subject - The subject of the message
  * @prop {String} body - The complete body text of the message
  */
 class Message {
@@ -18,7 +19,7 @@ class Message {
     this.recipients = []
     this.attachments = []
     this.isImportant = false
-    this.topic = ''
+    this.subject = ''
     this.body = ''
 
     return this
@@ -76,7 +77,7 @@ class Message {
    * @returns {Message} - Returns itself for chaining
    */
   setSubject(text) {
-    this.topic = text
+    this.subject = text
     return this
   }
 
@@ -101,7 +102,7 @@ class Message {
       data: {
         'Inhoud': this.body,
         'Bijlagen': this.attachments,
-        'Onderwerp': this.topic,
+        'Onderwerp': this.subject,
         'Afzender': {
           'Id': this.session.id,
           'Type': 3
