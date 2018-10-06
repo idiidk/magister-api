@@ -1,11 +1,11 @@
-import HTTP from './util/http.js'
-import moment from 'moment'
+import HTTP from "./util/http.js";
+import moment from "moment";
 
-import Group from './types/Group.js'
-import Appointment from './types/Appointment.js'
-import Person from './types/Person.js'
+import Group from "./types/Group.js";
+import Appointment from "./types/Appointment.js";
+import Person from "./types/Person.js";
 
-import Message from './chainables/Message'
+import Message from "./chainables/Message";
 
 /** A Session object for further interaction with Magister */
 class Session {
@@ -16,12 +16,12 @@ class Session {
    * @param {String} schoolUrl - The url of the currently connected school
    */
   constructor(sessionId, bearerToken, schoolUrl) {
-    this.sessionId = sessionId
-    this.bearerToken = bearerToken
-    this.schoolUrl = schoolUrl
-    this.id = null
+    this.sessionId = sessionId;
+    this.bearerToken = bearerToken;
+    this.schoolUrl = schoolUrl;
+    this.id = null;
 
-    this.Message = Message.bind(null, this)
+    this.Message = Message.bind(null, this);
   }
 
   /**
@@ -29,11 +29,13 @@ class Session {
    * @returns {Object} - Object with user info
    */
   getProfileInfo() {
-    return this.hitEndpoint('GET', `${this.schoolUrl}/api/account?noCache=0`)
-      .then((data) => {
-        this.id = data.Persoon.Id
-        return new Person(data.Persoon)
-      })
+    return this.hitEndpoint(
+      "GET",
+      `${this.schoolUrl}/api/account?noCache=0`
+    ).then(data => {
+      this.id = data.Persoon.Id;
+      return new Person(data.Persoon);
+    });
   }
 
   /**
@@ -43,15 +45,21 @@ class Session {
    * @returns {Object} - Object with info about appointments
    */
   getAppointments(from, to) {
-    return this.hitEndpoint('GET', `${this.schoolUrl}/api/personen/${this.id}/afspraken?status=1&tot=${moment(to).format("YYYY-MM-DD")}&van=${moment(from).format("YYYY-MM-DD")}`)
-      .then(data => {
-        const appointments = [];
-        for (let i = 0; i < data.Items.length; i++) {
-          appointments.push(new Appointment(data.Items[i]))
-        }
+    return this.hitEndpoint(
+      "GET",
+      `${this.schoolUrl}/api/personen/${
+        this.id
+      }/afspraken?status=1&tot=${moment(to).format("YYYY-MM-DD")}&van=${moment(
+        from
+      ).format("YYYY-MM-DD")}`
+    ).then(data => {
+      const appointments = [];
+      for (let i = 0; i < data.Items.length; i++) {
+        appointments.push(new Appointment(data.Items[i]));
+      }
 
-        return appointments
-      })
+      return appointments;
+    });
   }
 
   /**
@@ -59,15 +67,34 @@ class Session {
    * @returns {Array<Group>} - Array containing group objects
    */
   getGroups() {
-    return this.hitEndpoint('GET', `${this.schoolUrl}/api/personen/${this.id}/aanmeldingen?geenToekomstige=false`)
-      .then(data => {
-        const groups = [];
-        for (let i = 0; i < data.Items.length; i++) {
-          groups.push(new Group(data.Items[i]))
-        }
+    return this.hitEndpoint(
+      "GET",
+      `${this.schoolUrl}/api/personen/${
+        this.id
+      }/aanmeldingen?geenToekomstige=false`
+    ).then(data => {
+      const groups = [];
+      for (let i = 0; i < data.Items.length; i++) {
+        groups.push(new Group(data.Items[i]));
+      }
 
-        return groups
-      })
+      return groups;
+    });
+  }
+
+  /**
+   * Returns session data that can be used to reauthenticate later
+   * @returns {String}
+   */
+
+  saveAuth() {
+    const data = {
+      sessionId: this.sessionId,
+      bearerToken: this.bearerToken,
+      schoolUrl: this.schoolUrl
+    }
+
+    return JSON.stringify(data);
   }
 
   /**
@@ -76,17 +103,18 @@ class Session {
    * @param {Object} options - Additional options to pass to Axios
    * @returns {Promise<Object>} - Promise with body data
    */
-  hitEndpoint(method = 'GET', endpointUrl, options = {}) {
+  hitEndpoint(method = "GET", endpointUrl, options = {}) {
     if (options.headers) {
-      options.headers['Authorization'] = 'Bearer ' + this.bearerToken
+      options.headers["Authorization"] = "Bearer " + this.bearerToken;
     } else {
       options.headers = {
-        'Authorization': 'Bearer ' + this.bearerToken
-      }
+        Authorization: "Bearer " + this.bearerToken
+      };
     }
-    return HTTP[method.toLowerCase()](endpointUrl, options)
-      .then(response => response.data)
+    return HTTP[method.toLowerCase()](endpointUrl, options).then(
+      response => response.data
+    );
   }
 }
 
-export default Session
+export default Session;
