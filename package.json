@@ -11,7 +11,7 @@
     "jsdoc": "rm -rf jsdoc && ./node_modules/.bin/jsdoc src/** -d docs -R README.md",
     "test": "npm run build && ./node_modules/.bin/mocha"
   },
-  "prepare": "npm run build && npm run jsdoc",
+  "prepublishOnly": "npm run build && npm run jsdoc",
   "repository": {
     "type": "git",
     "url": "https://github.com/idiidk/magister-api.git"
