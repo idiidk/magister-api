@@ -75,3 +75,4 @@ typings/
 dist
 testing.js
 test/magisterConfig.json
+package-lock.json
