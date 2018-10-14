@@ -74,3 +74,4 @@ typings/
 
 dist
 testing.js
+test/magisterConfig.json

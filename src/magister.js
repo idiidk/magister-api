@@ -33,16 +33,16 @@ class Magister {
         if (data.schoolUrl && data.sessionId && data.bearerToken) {
           const session = new Session(data.sessionId, data.bearerToken, data.schoolUrl);
           this.session = session;
-          session
-            .getProfileInfo()
+          this.session
+            .initialize()
             .then(() => {
               resolve(session);
             })
             .catch(() => {
-              reject("Session expired!");
+              reject(new Error("Session expired!"));
             });
         } else {
-          reject("Auth object invalid!");
+          reject(new Error("Auth object invalid!"));
         }
       } else {
         if (this.school && this.username && this.password) {

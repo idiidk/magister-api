@@ -8,9 +8,14 @@
   ],
   "scripts": {
     "build": "./node_modules/.bin/babel src -d dist",
-    "jsdoc": "./node_modules/.bin/jsdoc src/** -d docs -R README.md",
-    "test": "./node_modules/.bin/mocha"
+    "jsdoc": "rm -rf jsdoc && ./node_modules/.bin/jsdoc src/** -d docs -R README.md",
+    "test": "npm run build && ./node_modules/.bin/mocha"
   },
+  "prepare": "npm run build && npm run jsdoc",
+  "pre-commit": [
+    "test",
+    "jsdoc"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/idiidk/magister-api.git"
@@ -39,6 +44,7 @@
     "babel-cli": "^6.26.0",
     "chai": "^4.1.2",
     "jsdoc": "^3.5.5",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "pre-commit": "^1.2.2"
   }
 }

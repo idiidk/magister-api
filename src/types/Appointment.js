@@ -6,11 +6,11 @@
  * @prop {Array<Object>} teachers - Array of teachers
  * @prop {Array<Object>} courses - Array of courses
  * @prop {Boolean} lastsWholeDay - Does the appointment last the whole day
- * @prop {Date} startDate - Appointment start date
- * @prop {Date} endDate - Appointment end date
+ * @prop {Date} startDate
+ * @prop {Date} endDate
  * @prop {Array<Object>} groups - Array of groups
  * @prop {Array<Object>} classRooms - Array of classrooms
- * @prop {String} location - Location of appointment
+ * @prop {String} location
  * @prop {String} description - Description of current event (could be homework)
  * @prop {Number} status - The status code
  * @prop {Number} type - The type code
