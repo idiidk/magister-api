@@ -13,8 +13,7 @@
   },
   "prepare": "npm run build && npm run jsdoc",
   "pre-commit": [
-    "test",
-    "jsdoc"
+    "test"
   ],
   "repository": {
     "type": "git",

@@ -192,7 +192,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="session.js.html">session.js</a>, <a href="session.js.html#line11">line 11</a>
+        <a href="session.js.html">session.js</a>, <a href="session.js.html#line12">line 12</a>
     </li></ul></dd>
     
 
@@ -234,6 +234,9 @@
             <dt><a href="Session.Appointment.html">Appointment</a></dt>
             <dd></dd>
         
+            <dt><a href="Session.Grade.html">Grade</a></dt>
+            <dd></dd>
+        
             <dt><a href="Session.Group.html">Group</a></dt>
             <dd></dd>
         
@@ -241,6 +244,9 @@
             <dd></dd>
         
             <dt><a href="Session.Person.html">Person</a></dt>
+            <dd></dd>
+        
+            <dt><a href="Session.Subject.html">Subject</a></dt>
             <dd></dd>
         </dl>
     
@@ -262,7 +268,7 @@
     
 
     
-    <h4 class="name" id="getAppointments"><span class="type-signature"></span>getAppointments<span class="signature">(from, to)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id="getAppointments"><span class="type-signature">(async) </span>getAppointments<span class="signature">(from, to)</span><span class="type-signature"> &rarr; {Promise.&lt;Array>}</span></h4>
     
 
     
@@ -386,7 +392,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="session.js.html">session.js</a>, <a href="session.js.html#line47">line 47</a>
+        <a href="session.js.html">session.js</a>, <a href="session.js.html#line86">line 86</a>
     </li></ul></dd>
     
 
@@ -413,7 +419,7 @@
 
         
 <div class="param-desc">
-    - Object with info about appointments
+    - Array containing appointments
 </div>
 
 
@@ -424,7 +430,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Object</span>
+<span class="param-type">Promise.&lt;Array></span>
 
 
     </dd>
@@ -442,7 +448,291 @@
     
 
     
-    <h4 class="name" id="getGroups"><span class="type-signature"></span>getGroups<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;Group>}</span></h4>
+    <h4 class="name" id="getCurrentSession"><span class="type-signature">(async) </span>getCurrentSession<span class="signature">()</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Updates current object containing url's
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="session.js.html">session.js</a>, <a href="session.js.html#line51">line 51</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getGrades"><span class="type-signature">(async) </span>getGrades<span class="signature">(amount, skip)</span><span class="type-signature"> &rarr; {Promise.&lt;Array>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Get grades in current year
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>amount</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Amount of grades</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>skip</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Gades to skip</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="session.js.html">session.js</a>, <a href="session.js.html#line65">line 65</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - Array containing grades
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Array></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getGroups"><span class="type-signature">(async) </span>getGroups<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;Group>>}</span></h4>
     
 
     
@@ -494,7 +784,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="session.js.html">session.js</a>, <a href="session.js.html#line69">line 69</a>
+        <a href="session.js.html">session.js</a>, <a href="session.js.html#line107">line 107</a>
     </li></ul></dd>
     
 
@@ -532,7 +822,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Array.&lt;Group></span>
+<span class="param-type">Promise.&lt;Array.&lt;Group>></span>
 
 
     </dd>
@@ -550,7 +840,7 @@
     
 
     
-    <h4 class="name" id="getProfileInfo"><span class="type-signature"></span>getProfileInfo<span class="signature">()</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id="getProfileInfo"><span class="type-signature">(async) </span>getProfileInfo<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;Person>}</span></h4>
     
 
     
@@ -602,7 +892,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="session.js.html">session.js</a>, <a href="session.js.html#line31">line 31</a>
+        <a href="session.js.html">session.js</a>, <a href="session.js.html#line38">line 38</a>
     </li></ul></dd>
     
 
@@ -640,7 +930,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Object</span>
+<span class="param-type">Promise.&lt;Person></span>
 
 
     </dd>
@@ -817,7 +1107,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="session.js.html">session.js</a>, <a href="session.js.html#line106">line 106</a>
+        <a href="session.js.html">session.js</a>, <a href="session.js.html#line143">line 143</a>
     </li></ul></dd>
     
 
@@ -925,7 +1215,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="session.js.html">session.js</a>, <a href="session.js.html#line90">line 90</a>
+        <a href="session.js.html">session.js</a>, <a href="session.js.html#line127">line 127</a>
     </li></ul></dd>
     
 
@@ -987,13 +1277,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="HTTP.html">HTTP</a></li><li><a href="Magister.html">Magister</a></li><li><a href="Session.html">Session</a></li><li><a href="Session.Appointment.html">Appointment</a></li><li><a href="Session.Group.html">Group</a></li><li><a href="Session.Message.html">Message</a></li><li><a href="Session.Person.html">Person</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="HTTP.html">HTTP</a></li><li><a href="Magister.html">Magister</a></li><li><a href="Session.html">Session</a></li><li><a href="Session.Appointment.html">Appointment</a></li><li><a href="Session.Grade.html">Grade</a></li><li><a href="Session.Group.html">Group</a></li><li><a href="Session.Message.html">Message</a></li><li><a href="Session.Person.html">Person</a></li><li><a href="Session.Subject.html">Subject</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Oct 06 2018 14:16:18 GMT+0200 (Central European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Oct 14 2018 20:56:57 GMT+0200 (Central European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>

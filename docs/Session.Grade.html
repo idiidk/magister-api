@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Appointment</title>
+    <title>JSDoc: Class: Grade</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Appointment</h1>
+    <h1 class="page-title">Class: Grade</h1>
 
     
 
@@ -29,9 +29,9 @@
 <header>
     
         <h2><span class="attribs"><span class="type-signature"></span></span>
-            <span class="ancestors"><a href="Session.html">Session</a>.</span>Appointment<span class="signature">(rawData)</span><span class="type-signature"></span></h2>
+            <span class="ancestors"><a href="Session.html">Session</a>.</span>Grade<span class="signature">(rawData)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">An Appointment object for further interaction with appointments</div>
+            <div class="class-description">A Grade object for further interaction with grades</div>
         
     
 </header>
@@ -46,7 +46,7 @@
     
 
     
-    <h4 class="name" id="Appointment"><span class="type-signature"></span>new Appointment<span class="signature">(rawData)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Grade"><span class="type-signature"></span>new Grade<span class="signature">(rawData)</span><span class="type-signature"></span></h4>
     
 
     
@@ -54,7 +54,7 @@
 
 
 <div class="description">
-    Initializes new Appointment object from a raw data object
+    Initializes new Grade object from a raw data object
 </div>
 
 
@@ -144,151 +144,36 @@
 
         <tr>
             
-                <td class="name"><code>notes</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Extra notes</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>finishedHomework</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Boolean</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Has finished homework</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>attachments</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array.&lt;Object></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Array of attachments</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>teachers</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array.&lt;Object></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Array of teachers</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>courses</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array.&lt;Object></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Array of courses</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>lastsWholeDay</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Boolean</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Does the appointment last the whole day</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>startDate</code></td>
+                <td class="name"><code>gotAt</code></td>
             
 
             <td class="type">
             
                 
 <span class="param-type">Date</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Date you got the grade at</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>hasExemption</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
 
 
             
@@ -305,13 +190,36 @@
 
         <tr>
             
-                <td class="name"><code>endDate</code></td>
+                <td class="name"><code>addedAt</code></td>
             
 
             <td class="type">
             
                 
 <span class="param-type">Date</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Date the grade was added at</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>isPassing</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
 
 
             
@@ -328,13 +236,13 @@
 
         <tr>
             
-                <td class="name"><code>groups</code></td>
+                <td class="name"><code>columnId</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Array.&lt;Object></span>
+<span class="param-type">Number</span>
 
 
             
@@ -344,43 +252,20 @@
 
             
 
-            <td class="description last">Array of groups</td>
+            <td class="description last"></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>classRooms</code></td>
+                <td class="name"><code>hasToRetry</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Array.&lt;Object></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Array of classrooms</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>location</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
+<span class="param-type">Boolean</span>
 
 
             
@@ -413,20 +298,20 @@
 
             
 
-            <td class="description last">Description of current event (could be homework)</td>
+            <td class="description last"></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>status</code></td>
+                <td class="name"><code>counts</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Number</span>
+<span class="param-type">Boolean</span>
 
 
             
@@ -436,20 +321,20 @@
 
             
 
-            <td class="description last">The status code</td>
+            <td class="description last"></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>type</code></td>
+                <td class="name"><code>subject</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Number</span>
+<span class="param-type">Subject</span>
 
 
             
@@ -459,7 +344,53 @@
 
             
 
-            <td class="description last">The type code</td>
+            <td class="description last">Subject of the grade</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">value</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Subject name</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code></code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">weighingFactor</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
         </tr>
 
     
@@ -498,7 +429,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="types_Appointment.js.html">types/Appointment.js</a>, <a href="types_Appointment.js.html#line18">line 18</a>
+        <a href="types_Grade.js.html">types/Grade.js</a>, <a href="types_Grade.js.html#line17">line 17</a>
     </li></ul></dd>
     
 

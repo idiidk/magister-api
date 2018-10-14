@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: types/Person.js</title>
+    <title>JSDoc: Source: types/Subject.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: types/Person.js</h1>
+    <h1 class="page-title">Source: types/Subject.js</h1>
 
     
 
@@ -26,36 +26,25 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/** A Person object for further interaction with people 
+            <pre class="prettyprint source linenums"><code>/** A Subject object for further interaction with subjects 
  * @memberof Session
- * @prop {String} firstName - The first name of the person
- * @prop {String} nameInfix - The name infix of the person
- * @prop {String} lastName - The last name of the person
- * @prop {String} officialFirstNames - All the offical first names of the person
- * @prop {String} initials - The initials of the person
- * @prop {String} birthDate - The birthdate of the person
- * @prop {Number} type - The person type
+ * @prop {String} code - The shorthand of the subject
+ * @prop {String} description - Full name
  */
-class Person {
+class Subject {
   /**
-   * Initializes new Person object from a raw data object
+   * Initializes new Subject object from a raw data object
    * @param {Object} rawData - The raw data directly parsed from JSON
    */
   constructor(rawData) {
     this.rawData = rawData
 
-    this.id = rawData.Id
-    this.firstName = rawData.Roepnaam
-    this.nameInfix = rawData.GebruikGeboortenaam ? rawData.GeboortenaamTussenvoegsel : rawData.OfficieleTussenvoegsels
-    this.lastName = rawData.GebruikGeboortenaam ? rawData.GeboorteAchternaam : rawData.OfficieleAchternaam
-    this.officialFirstNames = rawData.OfficieleVoornamen
-    this.initials = rawData.Voorletters
-    this.birthDate = rawData.Geboortedatum
-    this.type = rawData.Type || 3
+    this.code = rawData.code;
+    this.description = rawData.description;
   }
 }
 
-export default Person
+export default Subject
 </code></pre>
         </article>
     </section>

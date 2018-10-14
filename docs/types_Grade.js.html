@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: types/Person.js</title>
+    <title>JSDoc: Source: types/Grade.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: types/Person.js</h1>
+    <h1 class="page-title">Source: types/Grade.js</h1>
 
     
 
@@ -26,36 +26,45 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/** A Person object for further interaction with people 
+            <pre class="prettyprint source linenums"><code>import Subject from "./Subject.js";
+
+/** A Grade object for further interaction with grades 
  * @memberof Session
- * @prop {String} firstName - The first name of the person
- * @prop {String} nameInfix - The name infix of the person
- * @prop {String} lastName - The last name of the person
- * @prop {String} officialFirstNames - All the offical first names of the person
- * @prop {String} initials - The initials of the person
- * @prop {String} birthDate - The birthdate of the person
- * @prop {Number} type - The person type
+ * @prop {Date} gotAt - Date you got the grade at
+ * @prop {Boolean} hasExemption
+ * @prop {Date} addedAt - Date the grade was added at
+ * @prop {Boolean} isPassing
+ * @prop {Number} columnId
+ * @prop {Boolean} hasToRetry
+ * @prop {String} description
+ * @prop {Boolean} counts
+ * @prop {Subject} subject - Subject of the grade
+ * @prop {value} value - Subject name
+ * @prop {weighingFactor} 
  */
-class Person {
+class Grade {
   /**
-   * Initializes new Person object from a raw data object
+   * Initializes new Grade object from a raw data object
    * @param {Object} rawData - The raw data directly parsed from JSON
    */
   constructor(rawData) {
     this.rawData = rawData
 
-    this.id = rawData.Id
-    this.firstName = rawData.Roepnaam
-    this.nameInfix = rawData.GebruikGeboortenaam ? rawData.GeboortenaamTussenvoegsel : rawData.OfficieleTussenvoegsels
-    this.lastName = rawData.GebruikGeboortenaam ? rawData.GeboorteAchternaam : rawData.OfficieleAchternaam
-    this.officialFirstNames = rawData.OfficieleVoornamen
-    this.initials = rawData.Voorletters
-    this.birthDate = rawData.Geboortedatum
-    this.type = rawData.Type || 3
+    this.gotAt = new Date(rawData.behaaldOp);
+    this.hasExemption = rawData.heeftVrijstelling;
+    this.addedAt = new Date(rawData.ingevoerdOp);
+    this.isPassing = rawData.isVoldoende;
+    this.columnId = rawData.kolomId;
+    this.hasToRetry = rawData.moetInhalen;
+    this.description = rawData.omschrijving;
+    this.counts = rawData.teltMee;
+    this.subject = new Subject(rawData.vak);
+    this.value = rawData.waarde;
+    this.weighingFactor = rawData.weegFactor;
   }
 }
 
-export default Person
+export default Grade
 </code></pre>
         </article>
     </section>
