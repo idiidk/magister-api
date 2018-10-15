@@ -44,6 +44,16 @@ describe("Session", function () {
     });
   });
 
+  describe("#getAbsentions", function () {
+    it("Should be able to retrieve user absentions", function () {
+      return session
+        .getAbsentions(new Date(), new Date(new Date().getTime() + 86400000))
+        .then(absentions => {
+          expect(typeof absentions.length).to.equal("number");
+        });
+    });
+  });
+
   describe("#getAppointments", function () {
     it("Should be able to retrieve user appointments", function () {
       return session
