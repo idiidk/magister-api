@@ -5,6 +5,7 @@ import Group from "./types/Group.js";
 import Appointment from "./types/Appointment.js";
 import Person from "./types/Person.js";
 import Grade from "./types/Grade.js";
+import Absention from "./types/Absention.js";
 
 import Message from "./chainables/Message";
 
@@ -75,6 +76,29 @@ class Session {
     }
 
     return grades;
+  }
+
+    /**
+   * Get absentions from a date to aa date
+   * @param {Number} from - Starting date
+   * @param {Number} to - Ending date
+   * @returns {Promise<Array>} - Array containing absentions
+   */
+  async getAbsentions(from, to) {
+    const data = await this.hitEndpoint(
+      "GET",
+      `${this.schoolUrl}/api/personen/${
+        this.id
+      }/absenties?tot=${moment(to).format("YYYY-MM-DD")}&van=${moment(
+        from
+      ).format("YYYY-MM-DD")}`
+    )
+    const absentions = [];
+    for (let i = 0; i < data.Items.length; i++) {
+      absentions.push(new Absention(data.Items[i]));
+    }
+
+    return absentions;
   }
 
   /**
