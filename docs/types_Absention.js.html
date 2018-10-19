@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: types/Subject.js</title>
+    <title>JSDoc: Source: types/Absention.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: types/Subject.js</h1>
+    <h1 class="page-title">Source: types/Absention.js</h1>
 
     
 
@@ -26,26 +26,46 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/** A Subject object for further interaction with subjects 
+            <pre class="prettyprint source linenums"><code>"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/** An Absention object for further interaction with appointments 
  * @memberof Session
- * @prop {String} code - The shorthand of the subject
- * @prop {String} description - Full name
+ * @prop {Boolean} Geoorloofd
+ * @prop {Array&lt;Object>} Afspraak
+ * @prop {Number} Lesuur
+ * @prop {Date} Eind
+ * @prop {Date} Start
+ * @prop {Number} AfspraakId
+ * @prop {String} Code
+ * @prop {String} Omschrijving
+ * @prop {Number} Verantwoordingstype
+ * @prop {Number} Id
  */
-class Subject {
+class Appointment {
   /**
-   * Initializes new Subject object from a raw data object
+   * Initializes new Appointment object from a raw data object
    * @param {Object} rawData - The raw data directly parsed from JSON
    */
   constructor(rawData) {
-    this.rawData = rawData
+    this.rawData = rawData;
 
-    this.code = rawData.code;
-    this.description = rawData.description;
+    this.appointmentid = rawData.AfspraakId;
+    this.code = rawData.Code;
+    this.end = rawData.Eind;
+    this.allowedly = rawData.Geoorloofd;
+    this.id = rawData.Id;
+    this.lesson = rawData.Lesuur;
+    this.startDate = new Date(rawData.Start);
+    this.endDate = new Date(rawData.Einde);
+    this.description = rawData.Omschrijving;
+    this.accountabilityType = rawData.Verantwoordingtype;
   }
 }
 
-export default Subject
-</code></pre>
+exports.default = Appointment;</code></pre>
         </article>
     </section>
 
