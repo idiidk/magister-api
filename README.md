@@ -1,4 +1,4 @@
-# Magister API
+# Magister API [NOT WORKING ATM]
 
 An API for the Magister school software which implements the new login system!
 
